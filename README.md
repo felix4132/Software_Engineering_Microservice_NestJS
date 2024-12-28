@@ -1,6 +1,6 @@
 # Softwareengineering Microservice Project
 
-This project was created as part of the Software engineering course.
+This project was created as part of the software engineering course.
 
 ## Description
 This is a microservice project developed using NestJS.  
