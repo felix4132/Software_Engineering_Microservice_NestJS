@@ -29,9 +29,20 @@ import { RESOURCES_DIR } from './app.js';
 
 const tlsDir = path.resolve(RESOURCES_DIR, 'tls');
 console.debug('tlsDir = %s', tlsDir);
+const testTlsDir = path.resolve('.extras/compose/backend/keycloak');
 
 // public/private keys und Zertifikat fuer TLS
-export const httpsOptions: HttpsOptions = {
-    key: readFileSync(path.resolve(tlsDir, 'key.pem')), // eslint-disable-line security/detect-non-literal-fs-filename
-    cert: readFileSync(path.resolve(tlsDir, 'certificate.crt')), // eslint-disable-line security/detect-non-literal-fs-filename
-};
+export const httpsOptions: HttpsOptions =
+    process.env.NODE_ENV === 'test'
+        ? {
+              key: readFileSync(
+                  path.resolve(testTlsDir, 'key.pem'),
+              ), // eslint-disable-line security/detect-non-literal-fs-filename
+              cert: readFileSync(
+                  path.resolve(testTlsDir, 'certificate.crt'),
+              ), // eslint-disable-line security/detect-non-literal-fs-filename
+          }
+        : {
+              key: readFileSync(path.resolve(tlsDir, 'key.pem')), // eslint-disable-line security/detect-non-literal-fs-filename
+              cert: readFileSync(path.resolve(tlsDir, 'certificate.crt')), // eslint-disable-line security/detect-non-literal-fs-filename
+          };
