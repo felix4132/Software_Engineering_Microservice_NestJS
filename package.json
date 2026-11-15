@@ -115,7 +115,7 @@
     "helmet": "8.0.0",
     "js-yaml": "4.1.0",
     "keycloak-connect": "26.0.5",
-    "mysql2": "3.11.4",
+    "mysql2": "3.24.6",
     "nest-keycloak-connect": "1.10.1",
     "nodemailer": "7.0.11",
     "oracledb": "6.6.0",
