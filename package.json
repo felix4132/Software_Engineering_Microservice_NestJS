@@ -43,7 +43,7 @@
     "pretest": "npm run copy-resources",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
     "test:istanbul": "npm t -- --coverage",
-    "test:logdebug": "jest --runInBand",
+    "test:logdebug": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
     "test:dbserver": "set LOG_LEVEL=info&& set START_DB_SERVER=true&&jest --runInBand",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "asciidoctor": "node scripts/asciidoctor",

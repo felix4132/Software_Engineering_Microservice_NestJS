@@ -38,7 +38,7 @@ export class BannerService implements OnApplicationBootstrap {
      */
     onApplicationBootstrap() {
         const { host, nodeEnv, port } = nodeConfig;
-        figlet('Universitaet', (_, data) => console.info(data));
+        void figlet('Universitaet', (_, data) => console.info(data)); // eslint-disable-line no-void
         // https://nodejs.org/api/process.html
         // "Template String" ab ES 2015
         this.#logger.info('Node: %s', process.version);
