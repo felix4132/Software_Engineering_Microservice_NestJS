@@ -44,7 +44,7 @@ export class UniversitaetMutationResolver {
     }
 
     @Mutation()
-    @Roles({ roles: ['admin', 'user'] })
+    @Roles('admin', 'user')
     async create(@Args('input') universitaetDTO: UniversitaetDTO) {
         this.#logger.debug('create: universitaetDTO=%o', universitaetDTO);
 
