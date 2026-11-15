@@ -70,7 +70,7 @@ export class UniversitaetWriteController {
      * @returns Leeres Promise-Objekt.
      */
     @Post()
-    @Roles({ roles: ['admin', 'user'] })
+    @Roles('admin', 'user')
     @ApiOperation({ summary: 'Eine neue Universität anlegen' })
     @ApiCreatedResponse({ description: 'Erfolgreich neu angelegt' })
     @ApiBadRequestResponse({ description: 'Fehlerhafte Universitätsdaten' })

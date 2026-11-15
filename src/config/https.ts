@@ -22,6 +22,7 @@ import { type HttpsOptions } from '@nestjs/common/interfaces/external/https-opti
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { RESOURCES_DIR } from './app.js';
+import { env } from './env.js';
 
 // https://nodejs.org/api/path.html
 // https://nodejs.org/api/fs.html
@@ -29,9 +30,16 @@ import { RESOURCES_DIR } from './app.js';
 
 const tlsDir = path.resolve(RESOURCES_DIR, 'tls');
 console.debug('tlsDir = %s', tlsDir);
+const testTlsDir = path.resolve('.extras/compose/backend/keycloak');
 
 // public/private keys und Zertifikat fuer TLS
-export const httpsOptions: HttpsOptions = {
-    key: readFileSync(path.resolve(tlsDir, 'key.pem')), // eslint-disable-line security/detect-non-literal-fs-filename
-    cert: readFileSync(path.resolve(tlsDir, 'certificate.crt')), // eslint-disable-line security/detect-non-literal-fs-filename
-};
+export const httpsOptions: HttpsOptions =
+    env.NODE_ENV === 'test'
+        ? {
+              key: readFileSync(path.resolve(testTlsDir, 'key.pem')),
+              cert: readFileSync(path.resolve(testTlsDir, 'certificate.crt')),
+          }
+        : {
+              key: readFileSync(path.resolve(tlsDir, 'key.pem')), // eslint-disable-line security/detect-non-literal-fs-filename
+              cert: readFileSync(path.resolve(tlsDir, 'certificate.crt')), // eslint-disable-line security/detect-non-literal-fs-filename
+          };

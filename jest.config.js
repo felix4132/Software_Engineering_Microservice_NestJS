@@ -20,7 +20,12 @@
 // import { type Config } from '@jest/types';
 
 // const jestConfig: Config.InitialOptions = {
+import { createDefaultEsmPreset } from 'ts-jest';
+
 const jestConfig = {
+    ...createDefaultEsmPreset({
+        tsconfig: './tsconfig.json',
+    }),
     // globalSetup: '<rootDir>/dist/__tests__/global-setup.js',
     // globalTeardown: '<rootDir>/dist/__tests__/global-teardown.js',
     // setupFilesAfterEnv: ['<rootDir>/dist/__tests__/setup-jest.js'],
@@ -32,20 +37,9 @@ const jestConfig = {
     // https://swc.rs/docs/usage/jest: swc ("speedy web compiler") statt ts-jest
     preset: 'ts-jest/presets/default-esm',
 
-    extensionsToTreatAsEsm: ['.ts', '.mts', '.json'],
+    extensionsToTreatAsEsm: ['.ts', '.mts'],
     moduleNameMapper: {
         '^(\\.{1,2}/.*)\\.m?js$': '$1', // eslint-disable-line @typescript-eslint/naming-convention
-    },
-
-    transform: {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        '\\.test\\.m?ts$': [
-            'ts-jest',
-            {
-                useESM: true,
-                isolatedModules: false,
-            },
-        ],
     },
 
     testRegex: String.raw`__tests__/.*\.test\.(ts|mts)$`,
